@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "815178070902",
+    "firebase_url": "https://doubtapp-f7a85.firebaseio.com",
+    "project_id": "doubtapp-f7a85",
+    "storage_bucket": "doubtapp-f7a85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815178070902:android:3dbe3fb8e6662b55",
+        "android_client_info": {
+          "package_name": "com.appsomniac.doubtapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815178070902-prn2gh5qeh0vm52kqd76ao8i097190t3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnISYnQIZ4HwyM_NBlUdv8Myv_kBfnxXE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

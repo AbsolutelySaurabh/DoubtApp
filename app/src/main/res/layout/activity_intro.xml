@@ -1,0 +1,119 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".base.MainActivity">
+
+
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rootView"
+    android:background="#42A5F5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_margin="4dp"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:titleTextColor="@color/white"
+            android:subtitleTextColor="@color/white"
+            android:backgroundTint="@color/white"
+            app:titleTextAppearance="@style/Widget.ToolbarText"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_width="match_parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:layout_marginTop="90dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hey guy welcome to the DoubtApp!"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"
+
+            />
+
+    <!-- Spinner Element -->
+    <Spinner
+        android:id="@+id/spinner_class"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:background="@drawable/card"
+        android:prompt="@string/spinner_title"
+        android:layout_marginTop="10dp"
+
+        />
+
+        <!--&lt;!&ndash; Spinner Element &ndash;&gt;-->
+    <Spinner
+        android:id="@+id/spinner_exam"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:background="@drawable/card"
+        android:prompt="@string/spinner_title"
+        android:layout_marginTop="10dp"
+
+        />
+
+        <!--&lt;!&ndash; Spinner Element &ndash;&gt;-->
+    <Spinner
+        android:id="@+id/spinner_board"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:background="@drawable/card"
+        android:prompt="@string/spinner_title"
+        android:layout_marginTop="10dp"
+
+        />
+
+        <!--&lt;!&ndash; Spinner Element &ndash;&gt;-->
+    <Spinner
+        android:id="@+id/spinner_stream"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:background="@drawable/card"
+        android:prompt="@string/spinner_title"
+        android:layout_marginTop="10dp"
+        />
+
+
+        <TextView
+            android:id="@+id/text_proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="Proceed"
+            android:enabled="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+
+            />
+        <!--/>-->
+    </LinearLayout>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>

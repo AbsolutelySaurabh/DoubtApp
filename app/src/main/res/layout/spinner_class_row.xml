@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/avatar"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:src="@drawable/stream"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/spinner_class_value"
+                android:text="Class 12th"
+                android:textColor="@color/colorBlueDarkest"
+                android:textSize="17sp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        <View
+            android:id="@+id/line_up"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorBlueDark"
+            />
+
+    </RelativeLayout>
+</LinearLayout>

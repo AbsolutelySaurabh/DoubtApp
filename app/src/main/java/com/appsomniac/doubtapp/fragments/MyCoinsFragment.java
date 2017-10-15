@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appsomniac.doubtapp.R;
+import com.appsomniac.doubtapp.base.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +66,19 @@ public class MyCoinsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_coins, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_coins, container, false);
+
+       // getActivity().getActionBar().setTitle("My Coins");
+
+        return view;
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("My Coins");
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

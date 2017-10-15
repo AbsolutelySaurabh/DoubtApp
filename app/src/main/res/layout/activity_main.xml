@@ -14,9 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
+            android:elevation="0dp"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -28,47 +30,9 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
-            android:src="@drawable/ic_menu_share"
-            app:fabSize="normal"
-            />
-
-        <include
-            android:id="@+id/layout_fab_ask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            layout="@layout/fab_layout"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_trending"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
-            android:visibility="invisible"
-            android:src="@drawable/ic_menu_camera"
-            app:fabSize="normal"
-            />
+        <include layout="@layout/content_main" />
 
     </android.support.design.widget.CoordinatorLayout>
 

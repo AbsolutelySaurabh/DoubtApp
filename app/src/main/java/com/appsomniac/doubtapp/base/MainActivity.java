@@ -9,8 +9,11 @@ import android.os.Handler;
 import com.appsomniac.doubtapp.R;
 import com.appsomniac.doubtapp.activity.IntroActivity;
 import com.appsomniac.doubtapp.activity.LoginActivity;
+import com.appsomniac.doubtapp.fragments.HomeFragment;
 import com.appsomniac.doubtapp.fragments.MyCoinsFragment;
+import com.appsomniac.doubtapp.fragments.OneToOneFragment;
 import com.appsomniac.doubtapp.fragments.OnlineCoursesFragment;
+import com.appsomniac.doubtapp.fragments.ProfileFragment;
 import com.appsomniac.doubtapp.model.User;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,6 +23,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.appsomniac.doubtapp.ClassFragments.AskFragment;
@@ -50,7 +55,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MyCoinsFragment.OnFragmentInteractionListener,
-        OnlineCoursesFragment.OnFragmentInteractionListener{
+        OnlineCoursesFragment.OnFragmentInteractionListener, OneToOneFragment.OnFragmentInteractionListener,
+        HomeFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
 
     // tags used to attach the fragments
     private ViewPager viewPager;
@@ -70,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     View navHeader;
     NavigationView nav;
-    public android.support.design.widget.FloatingActionButton fab_activity, fab_trending;
-    public FloatingActionMenu fab_ask;
+//    public android.support.design.widget.FloatingActionButton fab_activity, fab_trending;
+//    public FloatingActionMenu fab_ask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,67 +99,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         setUserProfileInNavigationView();
 
+        //handling the dp clicks in navigationHeader
+        nav = ( NavigationView ) findViewById( R.id.nav_view );
+        if( nav != null ) {
+            LinearLayout mParent = (LinearLayout) nav.getHeaderView(0);
+            ImageView user_imageView = (ImageView) mParent.findViewById(R.id.avatar);
+
+            user_imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Fragment fragment = new ProfileFragment();
+                    if (fragment != null) {
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_frame, fragment);
+                        ft.commit();
+                    }
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+        }
+
+        //Initially land to HomeFragment
+        Fragment fragment = new HomeFragment();
+        //replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
+
         mHandler = new Handler();
-        fab_activity = (android.support.design.widget.FloatingActionButton) findViewById(R.id.fab_activity);
-        fab_activity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        final View f = findViewById(R.id.layout_fab_ask);
-        fab_ask = f.findViewById(R.id.menu);
-
-        fab_trending = (android.support.design.widget.FloatingActionButton) findViewById(R.id.fab_trending);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    fab_activity.show();
-                    f.setVisibility(View.GONE);
-                    fab_trending.hide();
-                } else
-                    if(position == 1) {
-                        fab_activity.hide();
-                        f.setVisibility(View.VISIBLE);
-                        fab_trending.hide();
-                    }else
-                        if(position == 2){
-                            fab_activity.hide();
-                            f.setVisibility(View.GONE);
-                            fab_trending.show();
-                        }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -220,47 +202,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     Glide.with(this).load(photoUrl)
                             .apply(requestOptions).thumbnail(0.5f).into(user_imageView);
-
                 }
             }
-        }
-    }
-
-    // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ActivityFragment(), "Activity");
-        adapter.addFragment(new AskFragment(), "Ask");
-        adapter.addFragment(new TrendingFragment(), "Trending");
-        viewPager.setAdapter(adapter);
-    }
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
         }
     }
 
@@ -299,29 +242,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_dashboard) {
+        //calling the method displayselectedscreen and passing the id of selected menu
+        displaySelectedScreen(item.getItemId());
+        //make this method blank
+        return true;
+    }
 
+    private void displaySelectedScreen(int itemId) {
 
+        //creating fragment object
+        Fragment fragment = null;
 
-            // Handle the camera action
-        } else if (id == R.id.nav_coins) {
+        //initializing the fragment object which is selected
+        switch (itemId) {
+            case R.id.nav_dashboard:
+                fragment = new HomeFragment();
+                break;
+            case R.id.nav_coins:
+                fragment = new MyCoinsFragment();
+                break;
+            case R.id.nav_online_courses:
+                fragment = new OnlineCoursesFragment();
+                break;
 
-        } else if (id == R.id.nav_oneToOne) {
+            case R.id.nav_oneToOne:
+                fragment = new OneToOneFragment();
+                break;
 
-        } else if (id == R.id.nav_online_courses) {
+            default:
+                fragment = new HomeFragment();
+        }
 
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_refer_and_earn) {
-
+        //replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
